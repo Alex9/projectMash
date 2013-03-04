@@ -1,0 +1,6 @@
+﻿@using (Html.BeginForm("AddTags", "Files", FormMethod.Post))
+{
+    <input type="text" name="tags" />
+    @Html.Hidden("fileID", ViewData["idFile"])
+    <input type="submit" value="Add tags" />
+}

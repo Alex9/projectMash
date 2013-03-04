@@ -1,0 +1,35 @@
+﻿@using (Html.BeginForm("AddTag", "Task"))
+{
+    @Html.Hidden("TaskID", ViewData["TaskID"]);
+    <label>Enter new tags separated by space</label><input type="text" name="tagArray" value=" " />
+    <input type="submit" name="" value="Add tags" />
+}
+<div id="currectTags">
+    @{
+    
+        var db = new Mash_v0._3.Models.databaseDataContext();
+        var getTags = from n in db.Tags
+                      join s in db.sifUserTasks on n.idTag equals s.idTag
+                      where s.idTask == (int)ViewData["TaskID"]
+                      select n;
+                    
+    }
+    @if (getTags.Count() > 0)
+    {
+        using (Html.BeginForm("DeleteTagSearch", "Task"))
+        {
+        @Html.Hidden("TaskID2", ViewData["TaskID"]);
+                                                   <p>Currently assaigned tags:</p>
+                                                   foreach (var item in getTags.ToList())
+                                                   {
+        <input type="checkbox" name="tagCollection" value="@item.tagName" /><label>@item.tagName</label><br />
+                                                   }                                                           
+        <input type="submit" name="" value="Delete selected tags" />
+        }
+    }
+    else
+    {
+        <p>
+            Currently no tags have been assigned</p>
+    }
+</div>

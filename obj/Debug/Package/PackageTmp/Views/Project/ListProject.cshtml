@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "List Project";
+    var signedUser = ViewData["user"] as Mash_v0._3.Models.User;
+    var projectList = ViewData["projectList"] as List<Mash_v0._3.Models.Project>;
+    
+}
+<div id="topnavigation">
+    <ul>
+        <li>@Html.ActionLink("New project", "AddNewProject", "Project")</li>
+        <li>@Html.ActionLink("All projects", "Index", "Message")</li>
+    </ul>
+</div>
+<div class="contentHeader">
+    Projects</div>
+<div class="clearall">
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#accordion").accordion();
+    });
+	</script>
+<div id="accordion">
+    @foreach (var item in projectList)
+    {   
+        <h2>
+            <a href="#">@item.projectName</a>
+        </h2>
+        <div>
+            @Html.ActionLink("Load project", "LoadProject", new { projectID = item.idProject })
+            <br />
+            @if (item.idOwner != signedUser.idUser)
+            {
+                @Html.ActionLink("Leave Project", "LeaveProject", new { projectID = item.idProject });
+            }
+            <br />
+            @if (item.idOwner == signedUser.idUser)
+            {
+                <p>You are the project owner</p>
+                @Html.ActionLink("Delete project", "DeleteProjectForGood", new { projectID = item.idProject });
+                <br />
+            }
+        </div>
+    }
+</div>

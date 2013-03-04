@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="mash_PrimarnaBazaModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="mash_PrimarnaBazaModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="mash_PrimarnaBazaModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="datoteka" EntityType="mash_PrimarnaBazaModel.Store.datoteka" store:Type="Tables" Schema="mateo" />
+    <EntitySet Name="korisnik" EntityType="mash_PrimarnaBazaModel.Store.korisnik" store:Type="Tables" Schema="mateo" />
+    <EntitySet Name="oznaka" EntityType="mash_PrimarnaBazaModel.Store.oznaka" store:Type="Tables" Schema="mateo" />
+    <EntitySet Name="Poruke" EntityType="mash_PrimarnaBazaModel.Store.Poruke" store:Type="Tables" Schema="mateo" />
+    <EntitySet Name="PrivatnaPoruka" EntityType="mash_PrimarnaBazaModel.Store.PrivatnaPoruka" store:Type="Tables" Schema="mateo" />
+    <EntitySet Name="projekt" EntityType="mash_PrimarnaBazaModel.Store.projekt" store:Type="Tables" Schema="mateo" />
+    <EntitySet Name="sif_OznakaDatoteka" EntityType="mash_PrimarnaBazaModel.Store.sif_OznakaDatoteka" store:Type="Tables" Schema="mateo" />
+    <EntitySet Name="sif_PozvaniProjektKorisnik" EntityType="mash_PrimarnaBazaModel.Store.sif_PozvaniProjektKorisnik" store:Type="Tables" Schema="mateo" />
+    <EntitySet Name="sif_ProjektDatoteka" EntityType="mash_PrimarnaBazaModel.Store.sif_ProjektDatoteka" store:Type="Tables" Schema="mateo" />
+    <EntitySet Name="sif_ProjektKorisnik" EntityType="mash_PrimarnaBazaModel.Store.sif_ProjektKorisnik" store:Type="Tables" Schema="mateo" />
+    <EntitySet Name="sif_TemaOdgovor" EntityType="mash_PrimarnaBazaModel.Store.sif_TemaOdgovor" store:Type="Tables" Schema="mateo" />
+    <EntitySet Name="Table2" EntityType="mash_PrimarnaBazaModel.Store.Table2" store:Type="Tables" Schema="mateo" />
+    <EntitySet Name="Zadatak" EntityType="mash_PrimarnaBazaModel.Store.Zadatak" store:Type="Tables" Schema="mateo" />
+    <AssociationSet Name="FK_datoteka_korisnik" Association="mash_PrimarnaBazaModel.Store.FK_datoteka_korisnik">
+      <End Role="korisnik" EntitySet="korisnik" />
+      <End Role="datoteka" EntitySet="datoteka" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrivatnaPoruka_korisnik" Association="mash_PrimarnaBazaModel.Store.FK_PrivatnaPoruka_korisnik">
+      <End Role="korisnik" EntitySet="korisnik" />
+      <End Role="PrivatnaPoruka" EntitySet="PrivatnaPoruka" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrivatnaPoruka_korisnik1" Association="mash_PrimarnaBazaModel.Store.FK_PrivatnaPoruka_korisnik1">
+      <End Role="korisnik" EntitySet="korisnik" />
+      <End Role="PrivatnaPoruka" EntitySet="PrivatnaPoruka" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sif_OznakaDatoteka_datoteka" Association="mash_PrimarnaBazaModel.Store.FK_sif_OznakaDatoteka_datoteka">
+      <End Role="datoteka" EntitySet="datoteka" />
+      <End Role="sif_OznakaDatoteka" EntitySet="sif_OznakaDatoteka" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sif_OznakaDatoteka_oznaka" Association="mash_PrimarnaBazaModel.Store.FK_sif_OznakaDatoteka_oznaka">
+      <End Role="oznaka" EntitySet="oznaka" />
+      <End Role="sif_OznakaDatoteka" EntitySet="sif_OznakaDatoteka" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sif_PozvaniProjektKorisnik_korisnik" Association="mash_PrimarnaBazaModel.Store.FK_sif_PozvaniProjektKorisnik_korisnik">
+      <End Role="korisnik" EntitySet="korisnik" />
+      <End Role="sif_PozvaniProjektKorisnik" EntitySet="sif_PozvaniProjektKorisnik" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sif_PozvaniProjektKorisnik_projekt" Association="mash_PrimarnaBazaModel.Store.FK_sif_PozvaniProjektKorisnik_projekt">
+      <End Role="projekt" EntitySet="projekt" />
+      <End Role="sif_PozvaniProjektKorisnik" EntitySet="sif_PozvaniProjektKorisnik" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sif_ProjektDatoteka_datoteka" Association="mash_PrimarnaBazaModel.Store.FK_sif_ProjektDatoteka_datoteka">
+      <End Role="datoteka" EntitySet="datoteka" />
+      <End Role="sif_ProjektDatoteka" EntitySet="sif_ProjektDatoteka" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sif_ProjektDatoteka_projekt" Association="mash_PrimarnaBazaModel.Store.FK_sif_ProjektDatoteka_projekt">
+      <End Role="projekt" EntitySet="projekt" />
+      <End Role="sif_ProjektDatoteka" EntitySet="sif_ProjektDatoteka" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sif_ProjektKorisnik_korisnik" Association="mash_PrimarnaBazaModel.Store.FK_sif_ProjektKorisnik_korisnik">
+      <End Role="korisnik" EntitySet="korisnik" />
+      <End Role="sif_ProjektKorisnik" EntitySet="sif_ProjektKorisnik" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sif_ProjektKorisnik_projekt" Association="mash_PrimarnaBazaModel.Store.FK_sif_ProjektKorisnik_projekt">
+      <End Role="projekt" EntitySet="projekt" />
+      <End Role="sif_ProjektKorisnik" EntitySet="sif_ProjektKorisnik" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sif_TemaOdgovor_Poruke" Association="mash_PrimarnaBazaModel.Store.FK_sif_TemaOdgovor_Poruke">
+      <End Role="Poruke" EntitySet="Poruke" />
+      <End Role="sif_TemaOdgovor" EntitySet="sif_TemaOdgovor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sif_TemaOdgovor_Poruke1" Association="mash_PrimarnaBazaModel.Store.FK_sif_TemaOdgovor_Poruke1">
+      <End Role="Poruke" EntitySet="Poruke" />
+      <End Role="sif_TemaOdgovor" EntitySet="sif_TemaOdgovor" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="datoteka">
+    <Key>
+      <PropertyRef Name="idDatoteke" />
+    </Key>
+    <Property Name="idDatoteke" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nazivDatoteke" Type="nchar" Nullable="false" MaxLength="50" />
+    <Property Name="putanja" Type="text" Nullable="false" />
+    <Property Name="opis" Type="text" Nullable="false" />
+    <Property Name="idVlasnik" Type="int" Nullable="false" />
+    <Property Name="datumPostavljanja" Type="datetime" Nullable="false" />
+    <Property Name="datumZadnjeIzmjene" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="korisnik">
+    <Key>
+      <PropertyRef Name="idKorisnik" />
+    </Key>
+    <Property Name="idKorisnik" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="email" Type="nchar" Nullable="false" MaxLength="50" />
+    <Property Name="ime" Type="nchar" Nullable="false" MaxLength="50" />
+    <Property Name="prezime" Type="nchar" Nullable="false" MaxLength="50" />
+    <Property Name="datumRegistracije" Type="datetime" Nullable="false" />
+    <Property Name="datumZadnjePrijave" Type="datetime" Nullable="false" />
+    <Property Name="lozinka" Type="nchar" Nullable="false" MaxLength="50" />
+    <Property Name="jePovlasten" Type="bit" />
+  </EntityType>
+  <EntityType Name="oznaka">
+    <Key>
+      <PropertyRef Name="idOznaka" />
+    </Key>
+    <Property Name="idOznaka" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nazivOznaka" Type="nchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Poruke">
+    <Key>
+      <PropertyRef Name="idPoruka" />
+    </Key>
+    <Property Name="idPoruka" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="naslovPoruka" Type="text" Nullable="false" />
+    <Property Name="sadrzaj" Type="text" Nullable="false" />
+    <Property Name="datumPostavljanja" Type="datetime" Nullable="false" />
+    <Property Name="idAutorPoruke" Type="int" Nullable="false" />
+    <Property Name="idProjekta" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PrivatnaPoruka">
+    <Key>
+      <PropertyRef Name="idPrivatnePoruke" />
+    </Key>
+    <Property Name="idPrivatnePoruke" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="naslovPrivatnePoruke" Type="text" Nullable="false" />
+    <Property Name="sadrzajPrivatnePoruke" Type="text" Nullable="false" />
+    <Property Name="idOdKoga" Type="int" Nullable="false" />
+    <Property Name="idZaKoga" Type="int" Nullable="false" />
+    <Property Name="datum" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="projekt">
+    <Key>
+      <PropertyRef Name="idProjekt" />
+    </Key>
+    <Property Name="idProjekt" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nazivProjekt" Type="nchar" Nullable="false" MaxLength="50" />
+    <Property Name="datumStvaranja" Type="datetime" Nullable="false" />
+    <Property Name="idVlasnika" Type="int" Nullable="false" />
+    <Property Name="opisProjekt" Type="text" />
+  </EntityType>
+  <EntityType Name="sif_OznakaDatoteka">
+    <Key>
+      <PropertyRef Name="idOznaka" />
+      <PropertyRef Name="idDatoteke" />
+    </Key>
+    <Property Name="idOznaka" Type="int" Nullable="false" />
+    <Property Name="idDatoteke" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sif_PozvaniProjektKorisnik">
+    <Key>
+      <PropertyRef Name="idProjekt" />
+      <PropertyRef Name="idKorisnik" />
+    </Key>
+    <Property Name="idProjekt" Type="int" Nullable="false" />
+    <Property Name="idKorisnik" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sif_ProjektDatoteka">
+    <Key>
+      <PropertyRef Name="idProjekt" />
+      <PropertyRef Name="idDatoteka" />
+    </Key>
+    <Property Name="idProjekt" Type="int" Nullable="false" />
+    <Property Name="idDatoteka" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sif_ProjektKorisnik">
+    <Key>
+      <PropertyRef Name="idProjekt" />
+      <PropertyRef Name="idKorisnik" />
+    </Key>
+    <Property Name="idProjekt" Type="int" Nullable="false" />
+    <Property Name="idKorisnik" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sif_TemaOdgovor">
+    <Key>
+      <PropertyRef Name="idTeme" />
+      <PropertyRef Name="idOdgovora" />
+    </Key>
+    <Property Name="idTeme" Type="int" Nullable="false" />
+    <Property Name="idOdgovora" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Table2">
+    <Key>
+      <PropertyRef Name="idProjekt" />
+      <PropertyRef Name="idKorisnik" />
+    </Key>
+    <Property Name="idProjekt" Type="int" Nullable="false" />
+    <Property Name="idKorisnik" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Zadatak">
+    <Key>
+      <PropertyRef Name="idZadatka" />
+    </Key>
+    <Property Name="idZadatka" Type="int" Nullable="false" />
+    <Property Name="tekst" Type="nchar" MaxLength="100" />
+    <Property Name="naslov" Type="nchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK_datoteka_korisnik">
+    <End Role="korisnik" Type="mash_PrimarnaBazaModel.Store.korisnik" Multiplicity="1" />
+    <End Role="datoteka" Type="mash_PrimarnaBazaModel.Store.datoteka" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="korisnik">
+        <PropertyRef Name="idKorisnik" />
+      </Principal>
+      <Dependent Role="datoteka">
+        <PropertyRef Name="idVlasnik" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PrivatnaPoruka_korisnik">
+    <End Role="korisnik" Type="mash_PrimarnaBazaModel.Store.korisnik" Multiplicity="1" />
+    <End Role="PrivatnaPoruka" Type="mash_PrimarnaBazaModel.Store.PrivatnaPoruka" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="korisnik">
+        <PropertyRef Name="idKorisnik" />
+      </Principal>
+      <Dependent Role="PrivatnaPoruka">
+        <PropertyRef Name="idOdKoga" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PrivatnaPoruka_korisnik1">
+    <End Role="korisnik" Type="mash_PrimarnaBazaModel.Store.korisnik" Multiplicity="1" />
+    <End Role="PrivatnaPoruka" Type="mash_PrimarnaBazaModel.Store.PrivatnaPoruka" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="korisnik">
+        <PropertyRef Name="idKorisnik" />
+      </Principal>
+      <Dependent Role="PrivatnaPoruka">
+        <PropertyRef Name="idZaKoga" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sif_OznakaDatoteka_datoteka">
+    <End Role="datoteka" Type="mash_PrimarnaBazaModel.Store.datoteka" Multiplicity="1" />
+    <End Role="sif_OznakaDatoteka" Type="mash_PrimarnaBazaModel.Store.sif_OznakaDatoteka" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="datoteka">
+        <PropertyRef Name="idDatoteke" />
+      </Principal>
+      <Dependent Role="sif_OznakaDatoteka">
+        <PropertyRef Name="idDatoteke" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sif_OznakaDatoteka_oznaka">
+    <End Role="oznaka" Type="mash_PrimarnaBazaModel.Store.oznaka" Multiplicity="1" />
+    <End Role="sif_OznakaDatoteka" Type="mash_PrimarnaBazaModel.Store.sif_OznakaDatoteka" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="oznaka">
+        <PropertyRef Name="idOznaka" />
+      </Principal>
+      <Dependent Role="sif_OznakaDatoteka">
+        <PropertyRef Name="idOznaka" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sif_PozvaniProjektKorisnik_korisnik">
+    <End Role="korisnik" Type="mash_PrimarnaBazaModel.Store.korisnik" Multiplicity="1" />
+    <End Role="sif_PozvaniProjektKorisnik" Type="mash_PrimarnaBazaModel.Store.sif_PozvaniProjektKorisnik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="korisnik">
+        <PropertyRef Name="idKorisnik" />
+      </Principal>
+      <Dependent Role="sif_PozvaniProjektKorisnik">
+        <PropertyRef Name="idKorisnik" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sif_PozvaniProjektKorisnik_projekt">
+    <End Role="projekt" Type="mash_PrimarnaBazaModel.Store.projekt" Multiplicity="1" />
+    <End Role="sif_PozvaniProjektKorisnik" Type="mash_PrimarnaBazaModel.Store.sif_PozvaniProjektKorisnik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="projekt">
+        <PropertyRef Name="idProjekt" />
+      </Principal>
+      <Dependent Role="sif_PozvaniProjektKorisnik">
+        <PropertyRef Name="idProjekt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sif_ProjektDatoteka_datoteka">
+    <End Role="datoteka" Type="mash_PrimarnaBazaModel.Store.datoteka" Multiplicity="1" />
+    <End Role="sif_ProjektDatoteka" Type="mash_PrimarnaBazaModel.Store.sif_ProjektDatoteka" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="datoteka">
+        <PropertyRef Name="idDatoteke" />
+      </Principal>
+      <Dependent Role="sif_ProjektDatoteka">
+        <PropertyRef Name="idDatoteka" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sif_ProjektDatoteka_projekt">
+    <End Role="projekt" Type="mash_PrimarnaBazaModel.Store.projekt" Multiplicity="1" />
+    <End Role="sif_ProjektDatoteka" Type="mash_PrimarnaBazaModel.Store.sif_ProjektDatoteka" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="projekt">
+        <PropertyRef Name="idProjekt" />
+      </Principal>
+      <Dependent Role="sif_ProjektDatoteka">
+        <PropertyRef Name="idProjekt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sif_ProjektKorisnik_korisnik">
+    <End Role="korisnik" Type="mash_PrimarnaBazaModel.Store.korisnik" Multiplicity="1" />
+    <End Role="sif_ProjektKorisnik" Type="mash_PrimarnaBazaModel.Store.sif_ProjektKorisnik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="korisnik">
+        <PropertyRef Name="idKorisnik" />
+      </Principal>
+      <Dependent Role="sif_ProjektKorisnik">
+        <PropertyRef Name="idKorisnik" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sif_ProjektKorisnik_projekt">
+    <End Role="projekt" Type="mash_PrimarnaBazaModel.Store.projekt" Multiplicity="1" />
+    <End Role="sif_ProjektKorisnik" Type="mash_PrimarnaBazaModel.Store.sif_ProjektKorisnik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="projekt">
+        <PropertyRef Name="idProjekt" />
+      </Principal>
+      <Dependent Role="sif_ProjektKorisnik">
+        <PropertyRef Name="idProjekt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sif_TemaOdgovor_Poruke">
+    <End Role="Poruke" Type="mash_PrimarnaBazaModel.Store.Poruke" Multiplicity="1" />
+    <End Role="sif_TemaOdgovor" Type="mash_PrimarnaBazaModel.Store.sif_TemaOdgovor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Poruke">
+        <PropertyRef Name="idPoruka" />
+      </Principal>
+      <Dependent Role="sif_TemaOdgovor">
+        <PropertyRef Name="idTeme" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sif_TemaOdgovor_Poruke1">
+    <End Role="Poruke" Type="mash_PrimarnaBazaModel.Store.Poruke" Multiplicity="1" />
+    <End Role="sif_TemaOdgovor" Type="mash_PrimarnaBazaModel.Store.sif_TemaOdgovor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Poruke">
+        <PropertyRef Name="idPoruka" />
+      </Principal>
+      <Dependent Role="sif_TemaOdgovor">
+        <PropertyRef Name="idOdgovora" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

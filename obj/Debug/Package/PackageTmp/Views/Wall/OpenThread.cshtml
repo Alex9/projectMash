@@ -1,0 +1,44 @@
+﻿@{
+    var messages = ViewData["messageOnTopic"] as List<Mash_v0._3.Models.Message>;
+    var users = ViewData["userListProject"] as List<Mash_v0._3.Models.User>;
+    ViewBag.Title = "View conversation";
+    int? topicid;
+}
+<h2>
+    Thread</h2>
+@if (messages != null)
+{
+    <h3>@messages.First().messageContent
+        @{topicid = messages.First().idMessageTopic;}
+    </h3>  
+    @Html.Hidden("bla", messages.Remove(messages.First()))
+    
+    <table border="1">
+        @if (users != null)
+        {
+            foreach (var item in messages)
+            {
+            <tr>
+                @if (users.Where(user => user.idUser == item.idMessageAuthor).Count() > 0)
+                {
+                    <td>
+                        <h4>@users.Where(user => user.idUser == item.idMessageAuthor).Single().firstname @users.Where(user => user.idUser == item.idMessageAuthor).Single().lastname<br />
+                        </h4>
+                        <h5>@item.timeCreated</h5>
+                    </td>
+                }
+                <td>@item.messageContent
+                </td>
+            </tr>
+    
+            }
+        }
+    </table>
+    <ul>
+        <li>
+            <div>@Ajax.ActionLink("Reply", "ReplyToTopic", new { topicID = topicid }, new AjaxOptions { UpdateTargetId = "replyToTopic" })</div>
+        </li>
+    </ul>
+    <div id="replyToTopic">
+    </div>
+}

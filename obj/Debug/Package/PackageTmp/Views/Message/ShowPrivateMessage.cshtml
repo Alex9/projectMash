@@ -1,0 +1,54 @@
+﻿@{
+    var privateMsg = ViewData["privateMessage"] as Mash_v0._3.Models.PrivateMessage;
+    var sender = ViewData["sender"] as Mash_v0._3.Models.User;
+    var reciver = ViewData["reciver"] as Mash_v0._3.Models.User;
+
+    ViewBag.Title = "Messages";
+}
+<form action="SendPrivateMessage" method="post">
+<table>
+    <tr>
+        <td>
+            From:<p>@(sender.firstname.TrimEnd() + " " + sender.lastname)<br />
+                Sent:@privateMsg.dateSent</p>
+        </td>
+        <td>
+            <h3>@privateMsg.idMessageHeader</h3>
+            <br />@privateMsg.idMessageText
+        </td>
+    </tr>
+    <tr>
+        <td>
+        </td>
+        <td>
+        <!--Sad sljedi odgovor, u skrivenom polju se nalazi id pošiljatelja tj. user kome odgovaramo*/)-->
+        @Html.Hidden("msgTo",privateMsg.idFrom)
+         <table>
+        <tr>
+            <td>
+                Title
+            </td>
+            <td>
+                <input type="text" name="title" value="RE:@privateMsg.idMessageHeader"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Message
+            </td>
+            <td>
+                <textarea name="message" cols="20" rows="5"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="submit" value="Send" />
+            </td>
+        </tr>
+    </table>
+        </td>
+    </tr>
+</table>
+</form>

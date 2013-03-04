@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="mash_main" Class="databaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=85.94.76.170\PADME;Initial Catalog=mash_main;Persist Security Info=True;User ID=mash" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="mash_mainConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="mash.[File]" Member="Files">
+    <Type Name="File">
+      <Column Name="idFile" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="fileName" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="path" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="description" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="idOwner" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateUpdated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="File_sif_ProjectFile" Member="sif_ProjectFiles" ThisKey="idFile" OtherKey="idFile" Type="sif_ProjectFile" />
+      <Association Name="File_sif_TagFile" Member="sif_TagFiles" ThisKey="idFile" OtherKey="idFile" Type="sif_TagFile" />
+    </Type>
+  </Table>
+  <Table Name="mash.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="idUser" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="firstname" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="lastname" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="dateRegistered" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateLastVisited" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="isVIP" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="User_sif_InviteProjectUser" Member="sif_InviteProjectUsers" ThisKey="idUser" OtherKey="idUser" Type="sif_InviteProjectUser" />
+      <Association Name="User_sif_ProjectUser" Member="sif_ProjectUsers" ThisKey="idUser" OtherKey="idUser" Type="sif_ProjectUser" />
+      <Association Name="User_sifTaskUserProject" Member="sifTaskUserProjects" ThisKey="idUser" OtherKey="idUser" Type="sifTaskUserProject" />
+    </Type>
+  </Table>
+  <Table Name="mash.Message" Member="Messages">
+    <Type Name="Message">
+      <Column Name="idMessage" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idMessageTopic" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="messageContent" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="timeCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="idMessageAuthor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idProject" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="mash.PrivateMessage" Member="PrivateMessages">
+    <Type Name="PrivateMessage">
+      <Column Name="idPrivateMessage" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idMessageHeader" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="idMessageText" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="idFrom" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idTo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateSent" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="[read]" Member="read" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="mash.Project" Member="Projects">
+    <Type Name="Project">
+      <Column Name="idProject" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="projectName" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="idOwner" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Project_sif_InviteProjectUser" Member="sif_InviteProjectUsers" ThisKey="idProject" OtherKey="idProject" Type="sif_InviteProjectUser" />
+      <Association Name="Project_sif_ProjectFile" Member="sif_ProjectFiles" ThisKey="idProject" OtherKey="idProject" Type="sif_ProjectFile" />
+      <Association Name="Project_sif_ProjectUser" Member="sif_ProjectUsers" ThisKey="idProject" OtherKey="idProject" Type="sif_ProjectUser" />
+      <Association Name="Project_sifTaskUserProject" Member="sifTaskUserProjects" ThisKey="idProject" OtherKey="idProject" Type="sifTaskUserProject" />
+    </Type>
+  </Table>
+  <Table Name="mash.sif_InviteProjectUser" Member="sif_InviteProjectUsers">
+    <Type Name="sif_InviteProjectUser">
+      <Column Name="idProject" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idUser" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Project_sif_InviteProjectUser" Member="Project" ThisKey="idProject" OtherKey="idProject" Type="Project" IsForeignKey="true" />
+      <Association Name="User_sif_InviteProjectUser" Member="User" ThisKey="idUser" OtherKey="idUser" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="mash.sif_ProjectFile" Member="sif_ProjectFiles">
+    <Type Name="sif_ProjectFile">
+      <Column Name="idProject" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idFile" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="File_sif_ProjectFile" Member="File" ThisKey="idFile" OtherKey="idFile" Type="File" IsForeignKey="true" />
+      <Association Name="Project_sif_ProjectFile" Member="Project" ThisKey="idProject" OtherKey="idProject" Type="Project" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="mash.sif_ProjectUser" Member="sif_ProjectUsers">
+    <Type Name="sif_ProjectUser">
+      <Column Name="idProject" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idUser" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idUserRole" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dateAssigned" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Project_sif_ProjectUser" Member="Project" ThisKey="idProject" OtherKey="idProject" Type="Project" IsForeignKey="true" />
+      <Association Name="User_sif_ProjectUser" Member="User" ThisKey="idUser" OtherKey="idUser" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="mash.sif_TagFile" Member="sif_TagFiles">
+    <Type Name="sif_TagFile">
+      <Column Name="idTag" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idFile" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="File_sif_TagFile" Member="File" ThisKey="idFile" OtherKey="idFile" Type="File" IsForeignKey="true" />
+      <Association Name="Tag_sif_TagFile" Member="Tag" ThisKey="idTag" OtherKey="idTag" Type="Tag" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="mash.sifProjectUserRole" Member="sifProjectUserRoles">
+    <Type Name="sifProjectUserRole">
+      <Column Name="idProject" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idUserRole" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="userRoleDescription" Type="System.String" DbType="Char(40)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="mash.sifTaskUserProject" Member="sifTaskUserProjects">
+    <Type Name="sifTaskUserProject">
+      <Column Name="idTask" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idProject" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idUser" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Project_sifTaskUserProject" Member="Project" ThisKey="idProject" OtherKey="idProject" Type="Project" IsForeignKey="true" />
+      <Association Name="User_sifTaskUserProject" Member="User" ThisKey="idUser" OtherKey="idUser" Type="User" IsForeignKey="true" />
+      <Association Name="Task_sifTaskUserProject" Member="Task" ThisKey="idTask" OtherKey="idTask" Type="Task" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="mash.sifUserTask" Member="sifUserTasks">
+    <Type Name="sifUserTask">
+      <Column Name="idTask" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idUser" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idTag" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="mash.Tag" Member="Tags">
+    <Type Name="Tag">
+      <Column Name="idTag" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tagName" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Tag_sif_TagFile" Member="sif_TagFiles" ThisKey="idTag" OtherKey="idTag" Type="sif_TagFile" />
+    </Type>
+  </Table>
+  <Table Name="mash.Task" Member="Tasks">
+    <Type Name="Task">
+      <Column Name="idTask" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="taskHeader" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="taskDeadline" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="taskDone" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Task_sifTaskUserProject" Member="sifTaskUserProjects" ThisKey="idTask" OtherKey="idTask" Type="sifTaskUserProject" />
+    </Type>
+  </Table>
+</Database>

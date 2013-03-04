@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    var db = new Mash_v0._3.Models.databaseDataContext();
+
+    string email = ((FormsIdentity)System.Web.HttpContext.Current.User.Identity).Name.ToString();
+    var signedUser = db.Users.Where(user => user.email.Trim() == email).Single();
+
+    var fileList = ViewData["files"] as List<Mash_v0._3.Models.File>;
+
+    var userListFile = (from n in db.Users
+                        select n).ToList();
+
+    var newThread = from n in db.Messages
+                    /*where n.timeCreated > signedUser.dateLastVisited*/
+                    orderby n.timeCreated descending
+                    select n;
+    var newTasks = from n in db.Tasks
+                   join s in db.sifUserTasks on n.idTask equals s.idTask
+                   where s.idUser == signedUser.idUser
+                   select n;
+}
+@*<div id="topnavigation">
+    <br />
+</div>
+<div class="contentHeader">
+    Dashboard</div>
+<div class="clearall">
+</div>*@
+<div id="Poruke">
+</div>
+<div id="invitations">
+    @if (ViewData["invitations"] != null)
+    {
+        <h2>
+            You have pending invitations!:<br />
+        </h2>
+        foreach (var item in (ViewData["invitations"] as List<Mash_v0._3.Models.Project>))
+        {
+        <ul>
+            <li>@Html.ActionLink(item.projectName, "AcceptInvitation", new { projectID = item.idProject })<br />
+                @Html.ActionLink("Odbaci zahtjev", "DeclineInvitation", new { projectID = item.idProject })</li>
+        </ul>
+        }
+    }
+    else
+    {
+        <h2>
+            You have no pending invitations.<br />
+        </h2>
+    }
+</div>
+<div id="liveFeed">
+ @*treba spojiti po datumu sve vrste dogadjaja kao na facebooku*@
+    <div id="lastestFile">
+        @if (fileList != null)
+        {
+            int i = 0;//Koliko se zapisa ispise
+            foreach (var item in fileList)
+            {
+                var user = userListFile.Where(usr => usr.idUser == item.idOwner).Single();
+            <h4><a href="../Message/SendPrivateMessage?msgTo=@user.idUser">@(user.firstname.TrimEnd() + " " + user.lastname.TrimEnd())
+                </a> has uploaded @item.fileName</h4>
+            <h5>
+                on @item.dateCreated</h5>
+              if (i > 5)
+              {
+                  break;
+              }
+              i++;
+            }
+        }
+    </div>
+    <div id="NewThread">
+        @if (newThread.Count() > 0)
+        {
+            int i = 0;
+            foreach (var item in newThread.ToList())
+            {
+                var user = userListFile.Where(usr => usr.idUser == item.idMessageAuthor).Single();
+            <h4><a href="../Message/SendPrivateMessage?msgTo=@user.idUser">@(user.firstname.TrimEnd() + " " + user.lastname.TrimEnd())
+                </a>wrote on @(newThread.Where(topic => topic.idMessageTopic == item.idMessageTopic).First().messageContent)
+            </h4>
+            <h5>
+                on @item.timeCreated</h5>
+              i++;
+              if (i > 5)
+              {
+                  break;
+              }
+            }
+        }
+    </div>
+    <h3>Tasks</h3>
+    <br />
+    <div id="Task">
+        @if (newTasks.Count() > 0)
+        {
+            foreach (var item in newTasks.ToList())
+            {
+            <h4>
+                Dodjeljeni ste na zadatak @item.taskHeader</h4>
+            }
+        }
+    </div>
+</div>

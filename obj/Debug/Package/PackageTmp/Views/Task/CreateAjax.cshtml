@@ -1,0 +1,45 @@
+﻿@model Mash_v0._3.Models.Task
+
+@using (Html.BeginForm("CreateAjax", "Task", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Task</legend>
+        <div class="editor-label">
+            Subject
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.taskHeader)
+            @Html.ValidationMessageFor(model => model.taskHeader)
+        </div>
+
+        <div class="editor-label">
+            Description
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.description)
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <div class="editor-label">
+            Date
+        </div>
+        <div class="editor-field">
+@*            Html.EditorFor(model => model.taskDeadline, null)
+*@
+<script>
+    $(function () {
+        $("#datePicker").datepicker();
+    });
+	</script>
+<input type="text" id="datePicker" name="datePicker" />
+        </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

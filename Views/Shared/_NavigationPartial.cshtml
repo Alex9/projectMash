@@ -1,0 +1,32 @@
+﻿@using Mash_v0._3.Helpers;
+@if (Request.IsAuthenticated)
+{
+    var db = new Mash_v0._3.Models.databaseDataContext();
+    string email = ((FormsIdentity)HttpContext.Current.User.Identity).Name.ToString();
+    var signedUser = db.Users.Where(item => item.email.Trim() == email.Trim()).Single();
+
+    var CheckPrivateMessages = from n in db.PrivateMessages
+                               where n.idTo == signedUser.idUser && n.read == false
+                               select n;
+    
+    var controller = ViewContext.RouteData.Values["controller"] as string ?? "Home";
+   var action = ViewContext.RouteData.Values["action"] as string ?? "Index";
+   var page = (controller + ":" + action).ToLower();  
+    
+    <ul id="menu">
+        <li>@Html.MenuLink("Dashboard", "Index", "Dashboard")</li>
+        <li>@Html.MenuLink("Wall", "Index", "Wall")</li>
+        @if (CheckPrivateMessages.Count() != 0)
+        {
+            <li>@Html.MenuLink("Messages(" + CheckPrivateMessages.Count() + ")", "Index", "Message")</li>
+        }
+        else
+        {
+            <li>@Html.MenuLink("Messages", "Index", "Message")</li>
+        }
+        <li>@Html.MenuLink("Contacts", "ContactList", "Project")</li>
+        <li>@Html.MenuLink("Files", "Files", "Files")</li>
+        <li>@Html.MenuLink("Tasks", "Index", "Task")</li>
+
+    </ul>
+}

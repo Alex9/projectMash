@@ -1,0 +1,10 @@
+﻿@using (Ajax.BeginForm("InviteNewUser", new AjaxOptions { UpdateTargetId = "inviteUser" }))
+{
+    var activeProject = Session["project"] as Mash_v0._3.Models.Project;
+    
+    <fieldset>
+        <legend>Invite new user on project @activeProject.projectName</legend>User email
+        <input type="text" name="userEmail" />
+        <input type="submit" />
+    </fieldset>
+}

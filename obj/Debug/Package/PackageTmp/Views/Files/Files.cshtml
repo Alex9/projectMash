@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "Files";
+    const int filePerPage = 10;
+    var fileList = ViewData["files"] as List<Mash_v0._3.Models.File>;
+    var tagList = ViewData["tags"] as List<Mash_v0._3.Models.Tag>;
+    var sifTagList = ViewData["sifTags"] as List<Mash_v0._3.Models.sif_TagFile>;
+    int i = 0;
+    int curPage = (int)TempData["curPage"];
+    int pageCount = 0;
+    if (fileList != null)
+    {
+        pageCount = fileList.Count / filePerPage;
+
+        if (fileList.Count % 10 != 0)
+        {
+            pageCount++;
+        }
+    }
+     
+}
+<div id="topnavigation">
+    <ul>
+        <li>@Ajax.ActionLink("Add file", "ShowUploadControls", new AjaxOptions { UpdateTargetId = "uploadControls" })</li>
+        <li>@Html.ActionLink("All files", "Files", "Files")</li>
+    </ul>
+    <br />
+</div>
+<div class="contentHeader">
+    Files</div>
+<div class="clearall">
+</div>
+<div id="uploadControls">
+</div>
+<br />
+<div id="pageControls">
+    @if (curPage > 0)
+    {
+        <label>@Html.ActionLink("Previous page", "PreviousPage", new { currectPage = curPage })
+            |</label>
+    }
+    @for (int j = 0; j < pageCount; j++)
+    {
+        if (curPage != j)
+        {
+        <label>
+            @Html.ActionLink((j + 1).ToString(), "SelectPage", new { selPage = j }) |</label>
+        }
+        else
+        {
+        <big>@(j + 1)|</big>
+        }
+    }
+    @if (curPage < pageCount - 1)
+    {
+        <label>@Html.ActionLink("Next page", "NextPage", new { currectPage = curPage })</label>
+    }</div>
+<br />
+<script type="text/javascript">
+    $(function () {
+        $("#accordion").accordion();
+    });
+</script>
+@if (fileList != null)
+{
+    <div id="accordion">
+        @for (int j = 0; j < filePerPage; j++)
+        {
+            if (curPage * filePerPage + i >= fileList.Count)
+            {
+                break;
+            }
+            var item = fileList[curPage * filePerPage + i];
+            <h3>
+                <a class="accord" href="#">@item.fileName.TrimEnd()</a></h3>
+            <p id="@i">
+                @if (tagList != null && sifTagList != null)
+                {
+                    var tag = (from n in tagList
+                               join s in sifTagList on n.idTag equals s.idTag
+                               where s.idFile == item.idFile
+                               select n).Distinct();
+
+                    if (tag.Count() != 0)
+                    {<span>Tags:
+                        @foreach (var tagItem in tag.ToList())
+                        {
+                            if (tag.ToList().Last() != tagItem)
+                            {
+                            <span>@Ajax.ActionLink(tagItem.tagName, "ShowTaggedFiles", new { idTag = tagItem.idTag }, new AjaxOptions { UpdateTargetId = "taggedFileList" }),
+                                 </span>
+                            }
+                            else
+                            {
+                            <span>@Ajax.ActionLink(tagItem.tagName, "ShowTaggedFiles", new { idTag = tagItem.idTag }, new AjaxOptions { UpdateTargetId = "taggedFileList" })
+                                </span>
+                            }
+                        }</span>
+                    }
+                    else
+                    {
+                    <span>Tags: No tags</span>
+                    }
+                }
+                <br />
+                <br />
+                @Html.ActionLink("Download", "Download", new { path = Server.MapPath("/Files/" + item.fileName.TrimEnd()) })
+                |
+                @Ajax.ActionLink("Tag file", "ShowTagControl", new { idFile = item.idFile }, new AjaxOptions { UpdateTargetId = i.ToString() })
+                |
+                @Ajax.ActionLink("Delete file", "ConfirmDeletion", new { fileID = item.idFile }, new AjaxOptions { UpdateTargetId = i.ToString() })
+                @{i++;}
+                <br />
+                <br />
+            </p>
+            
+   
+        }
+    </div>
+}
+<div id="taggedFileList">
+</div>

@@ -1,0 +1,31 @@
+﻿<h1>@ViewBag.ProjectName</h1>
+<h1>@ViewBag.ProjectDescription</h1>
+<form id="uploadForm" action="@Url.Action("uploadFile", "Files")" method="post" enctype="multipart/form-data" >
+<fieldset>
+    <legend>Upload</legend>
+    <input id="file" name="file" type="file" value="" />
+    <input id="uploadButton" type="submit" value="Submit" /><br />
+    <input name="tagList" type="text"/>
+    <input type="button" class="Odustani" value="Odustani" />
+</fieldset>
+</form>
+<div id="task">
+    @{
+        Mash_v0._3.Models.databaseDataContext db = new Mash_v0._3.Models.databaseDataContext();
+        Mash_v0._3.Models.User user = ViewData["user"] as Mash_v0._3.Models.User;
+        Mash_v0._3.Models.Project project = ViewData["project"] as Mash_v0._3.Models.Project;
+        if (user.idUser == project.idOwner)
+        {
+        <p>@Html.ActionLink("Delete project", "DeleteProject", new { projectID = project.idProject })</p>
+        }
+    }
+    <!--fieldset>
+        <legend>Tasks</legend>
+        <ul>
+            <li></li>
+        </ul>
+    </fieldset><-->
+</div>
+@Ajax.ActionLink("Invite new user", "ShowInviteControle", new AjaxOptions { UpdateTargetId = "inviteUser" })
+<div id="inviteUser">
+</div>

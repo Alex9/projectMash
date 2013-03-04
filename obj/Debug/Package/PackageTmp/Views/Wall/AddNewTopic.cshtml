@@ -1,0 +1,24 @@
+﻿@using (Html.BeginForm("AddNewTopic", "Wall", FormMethod.Post))
+{
+    <fieldset>
+        <legend>New topic</legend>
+        <table>
+            <tr>
+                <td>
+                    Message
+                </td>
+                <td>
+                    <textarea name="topicMessage" cols="20" rows="10"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <input type="submit" value="Add new topic" />
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    
+}

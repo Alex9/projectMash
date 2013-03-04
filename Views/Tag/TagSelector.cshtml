@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "TagSelector";
+    var taggedFileList = ViewData["files"] as List<Mash_v0._3.Models.File>;
+    var taggedTaskList = ViewData["task"] as List<Mash_v0._3.Models.Task>;
+}
+<h2>
+    Search results</h2>
+@if(taggedFileList !=null)
+{
+    foreach (var item in taggedFileList)
+	{
+    <p>
+        @Html.ActionLink(item.fileName.TrimEnd(), "../Files/Download", new { path = Server.MapPath("/Files/" + item.fileName.TrimEnd()) })<br />
+    </p>
+                               
+	}
+}
+@if(taggedTaskList!=null)
+{
+    foreach (var item in taggedTaskList)
+	{
+		 @Html.ActionLink(item.taskHeader, "../Task/Details", new { id = item.idTask })
+	}
+      
+}

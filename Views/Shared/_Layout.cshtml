@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui.min.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-23002103-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <div id="header">
+            <div id="logo">
+            <a href="/" ><img src="@Url.Content("~/Content/Images/logoMash.gif")" alt="logo" /></a>
+            </div>
+            <div id="topright">
+           beta v.0.4.,  <a href="https://docs.google.com/document/d/1WMF_s1KZo8d7ItBurYevkndVXKtO3ZDcomPtVOmK3jY/edit?hl=en#">(internal buglist)</a><br />
+            @DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year
+            <br />
+            @if (Request.IsAuthenticated)
+            {<text>
+            
+            Logged in as: <b>@Context.User.Identity.Name</b> [ @Html.ActionLink("Logout?", "Exit", "Login") ]</text>
+                
+            }
+            else
+            {<text>[ 
+                @Html.ActionLink("Log on?", "Enter", "Login")
+                 ]</text>
+                <text>[ 
+                @Html.ActionLink("Register?", "Registration", "Login")
+                 ]</text>
+            }
+            
+            </div>
+
+        </div>
+
+        <div id="main">
+            <div id="logindisplay">
+                @Html.Partial("_LogOnPartial")
+            </div>
+            <div id="leftbar">
+            @Html.Partial("_NavigationPartial")
+            </div>
+
+            <div id="content">
+            @RenderBody()
+            </div>
+
+            <div id="rightbar">
+                 @Html.Partial("_WidgetsPartial")
+            </div>
+            <div class="clearall"></div>
+            <div id="footer">
+            <div id="footerSocial">
+            <span>Spread the word</span>
+            <div style="clear:both">
+<div id="fb-root"></div>
+<script src="http://connect.facebook.net/en_US/all.js#appId=201955169847358&amp;xfbml=1"></script>
+<fb:like href="projectmash.com" class="facebookButton" send="true" width="320" show_faces="true" font=""></fb:like>
+            </div>
+            <div class="footerSocialElement">
+            <a href="http://twitter.com/share" class="twitter-share-button" data-url="projectmash.com" data-count="horizontal" >Tweet</a>
+            <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+            </div>
+            </div>
+            <div id="footerNavigation">
+            <span>Site Navigation</span>
+            <div id="footerNavigationList">
+            <ul>
+<li>@Html.ActionLink("About ProjectMash", "AboutProjectMash", "Visitors")</li>
+<li><a href="#">About Team</a></li>
+<li>@Html.ActionLink("Contact us", "ContactUs", "Visitors")</li>
+<li><a href="#">Try demo</a></li>
+</ul>
+<br style="clear: left;" />
+</div>
+</div>
+            </div><div class="clearAll">
+            </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Mash_v0._3.Models.Message>
+@{
+    ViewBag.Title = "Messages";
+    var getPrivateMessages = ViewData["privateMessages"] as List<Mash_v0._3.Models.PrivateMessage>;
+}
+<div id="topnavigation">
+    <ul>
+        <li>@Ajax.ActionLink("New message", "NewMessage", new AjaxOptions { UpdateTargetId = "newMsg" })</li>
+        <li>@Html.ActionLink("Inbox", "Index", "Message")</li>
+        <li>@Html.ActionLink("Sentbox", "Index", "Message")</li>
+    </ul>
+</div>
+<div class="contentHeader">
+    Messages</div>
+<div class="clearall">
+</div>
+<div id="newMsg">
+</div>
+<h2>
+    @ViewBag.Message</h2>
+@if (getPrivateMessages.Count != 0)
+{
+    <table>
+        <tr>
+            <td >
+                Status
+            </td>
+            <td >
+                From
+            </td>
+            <td>
+                Message
+            </td>
+        </tr>
+        @foreach (var item in getPrivateMessages)
+        {
+            <tr>
+                <td >
+                    @if ((bool)item.read)
+                    {
+                        <p>
+                            <img src="../../Content/Images/readMsg.png" height="15px" width="20px" alt="Read" /></p>
+                    }
+                    else
+                    {
+                        <p>
+                            <img src="../../Content/Images/unreadMsg.png" height="15px" width="20px" alt="Unread" /></p>
+                    }
+                </td>
+                <td >
+                   <strong> @((from n in (new Mash_v0._3.Models.databaseDataContext()).Users
+                       where n.idUser == item.idFrom
+                       select n).Single().email)</strong>
+                    <h5>@item.dateSent</h5>
+                </td>
+                <td >
+                    <h4>
+                        @Html.ActionLink(item.idMessageHeader, "ShowPrivateMessage", new { msgID = item.idPrivateMessage })</h4>
+                    <br />
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>
+        No private messages</p>
+}

@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="mash_mainModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="mash_mainEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="File" EntityType="mash_mainModel.File" />
+    <EntitySet Name="Message" EntityType="mash_mainModel.Message" />
+    <EntitySet Name="PrivateMessage" EntityType="mash_mainModel.PrivateMessage" />
+    <EntitySet Name="Project" EntityType="mash_mainModel.Project" />
+    <EntitySet Name="Tag" EntityType="mash_mainModel.Tag" />
+    <EntitySet Name="Task" EntityType="mash_mainModel.Task" />
+    <EntitySet Name="User" EntityType="mash_mainModel.User" />
+    <AssociationSet Name="sif_InviteProjectUser" Association="mash_mainModel.sif_InviteProjectUser">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="sif_ProjectFile" Association="mash_mainModel.sif_ProjectFile">
+      <End Role="File" EntitySet="File" />
+      <End Role="Project" EntitySet="Project" />
+    </AssociationSet>
+    <AssociationSet Name="sif_ProjectUser" Association="mash_mainModel.sif_ProjectUser">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="sif_TagFile" Association="mash_mainModel.sif_TagFile">
+      <End Role="File" EntitySet="File" />
+      <End Role="Tag" EntitySet="Tag" />
+    </AssociationSet>
+    <AssociationSet Name="sif_TopicAnswer" Association="mash_mainModel.sif_TopicAnswer">
+      <End Role="Message" EntitySet="Message" />
+      <End Role="Message1" EntitySet="Message" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="File">
+    <Key>
+      <PropertyRef Name="idFile" />
+    </Key>
+    <Property Name="idFile" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fileName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+    <Property Name="path" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="description" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="idOwner" Type="Int32" Nullable="false" />
+    <Property Name="dateCreated" Type="DateTime" Nullable="false" />
+    <Property Name="dateUpdated" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Project" Relationship="mash_mainModel.sif_ProjectFile" FromRole="File" ToRole="Project" />
+    <NavigationProperty Name="Tag" Relationship="mash_mainModel.sif_TagFile" FromRole="File" ToRole="Tag" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="idMessage" />
+    </Key>
+    <Property Name="idMessage" Type="Int32" Nullable="false" />
+    <Property Name="messageHeader" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="messageContent" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="dateCreated" Type="DateTime" Nullable="false" />
+    <Property Name="idMessageAuthor" Type="Int32" Nullable="false" />
+    <Property Name="idProject" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Message1" Relationship="mash_mainModel.sif_TopicAnswer" FromRole="Message" ToRole="Message1" />
+    <NavigationProperty Name="Message2" Relationship="mash_mainModel.sif_TopicAnswer" FromRole="Message1" ToRole="Message" />
+  </EntityType>
+  <EntityType Name="PrivateMessage">
+    <Key>
+      <PropertyRef Name="idPrivateMessage" />
+    </Key>
+    <Property Name="idPrivateMessage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idMessageHeader" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="idMessageText" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="idFrom" Type="Int32" Nullable="false" />
+    <Property Name="idTo" Type="Int32" Nullable="false" />
+    <Property Name="dateSent" Type="DateTime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="idProject" />
+    </Key>
+    <Property Name="idProject" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="projectName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+    <Property Name="dateCreated" Type="DateTime" Nullable="false" />
+    <Property Name="idOwner" Type="Int32" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="User" Relationship="mash_mainModel.sif_InviteProjectUser" FromRole="Project" ToRole="User" />
+    <NavigationProperty Name="File" Relationship="mash_mainModel.sif_ProjectFile" FromRole="Project" ToRole="File" />
+    <NavigationProperty Name="User1" Relationship="mash_mainModel.sif_ProjectUser" FromRole="Project" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="idTag" />
+    </Key>
+    <Property Name="idTag" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tagName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+    <NavigationProperty Name="File" Relationship="mash_mainModel.sif_TagFile" FromRole="Tag" ToRole="File" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="idTask" />
+    </Key>
+    <Property Name="idTask" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="100" Unicode="true" FixedLength="true" />
+    <Property Name="taskHeader" Type="String" MaxLength="100" Unicode="true" FixedLength="true" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+    <Property Name="firstname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+    <Property Name="lastname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+    <Property Name="dateRegistered" Type="DateTime" Nullable="false" />
+    <Property Name="dateLastVisited" Type="DateTime" Nullable="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+    <Property Name="isVIP" Type="Boolean" />
+    <NavigationProperty Name="Project" Relationship="mash_mainModel.sif_InviteProjectUser" FromRole="User" ToRole="Project" />
+    <NavigationProperty Name="Project1" Relationship="mash_mainModel.sif_ProjectUser" FromRole="User" ToRole="Project" />
+  </EntityType>
+  <Association Name="sif_InviteProjectUser">
+    <End Role="Project" Type="mash_mainModel.Project" Multiplicity="*" />
+    <End Role="User" Type="mash_mainModel.User" Multiplicity="*" />
+  </Association>
+  <Association Name="sif_ProjectFile">
+    <End Role="File" Type="mash_mainModel.File" Multiplicity="*" />
+    <End Role="Project" Type="mash_mainModel.Project" Multiplicity="*" />
+  </Association>
+  <Association Name="sif_ProjectUser">
+    <End Role="Project" Type="mash_mainModel.Project" Multiplicity="*" />
+    <End Role="User" Type="mash_mainModel.User" Multiplicity="*" />
+  </Association>
+  <Association Name="sif_TagFile">
+    <End Role="File" Type="mash_mainModel.File" Multiplicity="*" />
+    <End Role="Tag" Type="mash_mainModel.Tag" Multiplicity="*" />
+  </Association>
+  <Association Name="sif_TopicAnswer">
+    <End Role="Message" Type="mash_mainModel.Message" Multiplicity="*" />
+    <End Role="Message1" Type="mash_mainModel.Message" Multiplicity="*" />
+  </Association>
+</Schema>

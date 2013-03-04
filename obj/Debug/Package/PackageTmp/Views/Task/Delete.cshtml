@@ -1,0 +1,28 @@
+﻿@model Mash_v0._3.Models.Task
+
+@{
+    ViewBag.Title = "Delete task";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Task</legend>
+
+    <div class="display-label">description</div>
+    <div class="display-field">@Model.description</div>
+
+    <div class="display-label">taskHeader</div>
+    <div class="display-field">@Model.taskHeader</div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+    @Html.HiddenFor(model => model.idTask)
+        <input type="submit" value="Delete" /> |
+
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+
+

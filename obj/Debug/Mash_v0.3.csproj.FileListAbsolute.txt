@@ -1,0 +1,15 @@
+C:\Users\Mateo\Dropbox\WSC\[WSC - Implementim]\Mash_v0.3\bin\Mash_v0.3.dll
+C:\Users\Mateo\Dropbox\WSC\[WSC - Implementim]\Mash_v0.3\bin\Mash_v0.3.pdb
+C:\Users\Mateo\Dropbox\WSC\[WSC - Implementim]\Mash_v0.3\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Mateo\Dropbox\WSC\[WSC - Implementim]\Mash_v0.3\obj\Debug\Mash_v0.3.dll
+C:\Users\Mateo\Dropbox\WSC\[WSC - Implementim]\Mash_v0.3\obj\Debug\Mash_v0.3.pdb
+D:\Documents\bpc i wsc\Mash_v0.3\bin\Mash_v0.3.dll
+D:\Documents\bpc i wsc\Mash_v0.3\bin\Mash_v0.3.pdb
+D:\Documents\bpc i wsc\Mash_v0.3\obj\Debug\ResolveAssemblyReference.cache
+D:\Documents\bpc i wsc\Mash_v0.3\obj\Debug\Mash_v0.3.dll
+D:\Documents\bpc i wsc\Mash_v0.3\obj\Debug\Mash_v0.3.pdb
+D:\Projects\Mash_v0.3\bin\Mash_v0.3.dll
+D:\Projects\Mash_v0.3\bin\Mash_v0.3.pdb
+D:\Projects\Mash_v0.3\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\Mash_v0.3\obj\Debug\Mash_v0.3.dll
+D:\Projects\Mash_v0.3\obj\Debug\Mash_v0.3.pdb

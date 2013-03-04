@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Index list";
+    Mash_v0._3.Models.Project activeProject = Session["project"] as Mash_v0._3.Models.Project;
+    Mash_v0._3.Models.User signedUser = ViewData["user"] as Mash_v0._3.Models.User;
+    var roles = ViewData["rolesList"] as List<Mash_v0._3.Models.sifProjectUserRole>;
+    }
+<div id="topnavigation">
+    <ul>
+        <li>@Ajax.ActionLink("Add New User Role", "Create", new AjaxOptions { UpdateTargetId = "NewTopic" })</li>
+    </ul>
+</div>
+<div class="contentHeader">User roles</div>
+<div class="clearall">
+</div>
+<div id="NewTopic">
+</div>
+
+<table>
+    <tr>
+            <th>
+            User role:
+        </th>
+        <th></th>
+
+    </tr>
+    @if (roles != null)
+    {
+        foreach (var item in roles)
+        {
+            if (item.userRoleDescription != null)
+            {
+    <tr>
+        <td>
+            @item.userRoleDescription
+        </td>
+                <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.idUserRole }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.idUserRole })
+        </td>
+    </tr>
+            }
+        }
+    }
+</table>
+

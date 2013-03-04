@@ -1,0 +1,6 @@
+﻿@{var files = ViewData["FilesByTag"] as List<Mash_v0._3.Models.File>;  }
+@foreach (var item in files)
+	{
+    <p>@Html.ActionLink(item.fileName.TrimEnd(), "Download", new { path = Server.MapPath("/Files/" + item.fileName.TrimEnd()) })<br />
+    </p>
+	}

@@ -1,0 +1,89 @@
+﻿@using (Html.BeginForm("NewMessage", "Message", FormMethod.Post))
+{
+    <fieldset>
+        <legend>New Message</legend>
+        <table>
+            <tr>
+                <td>
+                    To
+                </td>
+                <td>
+                    <input type="text" name="to" />
+                    <script>
+                        $(function () {
+
+                                            @{
+                    List<string> lista = new List<string>();
+                    lista.Add("fsg");
+                    lista.Add("abc");
+
+                    foreach (string item in lista){
+                    
+                    
+
+                    }
+                    
+                    }
+                            var availableTags = [
+			"ActionScript",
+			"AppleScript",
+			"Asp",
+			"BASIC",
+			"C",
+			"C++",
+			"Clojure",
+			"COBOL",
+			"ColdFusion",
+			"Erlang",
+			"Fortran",
+			"Groovy",
+			"Haskell",
+			"Java",
+			"JavaScript",
+			"Lisp",
+			"Perl",
+			"PHP",
+			"Python",
+			"Ruby",
+			"Scala",
+			"Scheme"
+		];
+                            $("#tags").autocomplete({
+                                source: availableTags
+                            });
+                        });
+	</script>
+
+
+	
+<div class="demo">
+
+<div class="ui-widget">
+	<label for="tags">Tags: </label>
+	<input id="tags">
+</div>
+
+</div><!-- End demo -->
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Subject
+                </td>
+                <td>
+                    <input type="text" name="subject" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Message
+                </td>
+                <td>
+                    <textarea name="message" cols="10" rows="10"></textarea>
+                </td>
+            </tr>
+            <tr><td></td><td><input type="submit" value="Send" class="button"></td></tr>
+        </table>
+    </fieldset>
+}

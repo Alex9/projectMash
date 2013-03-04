@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "AddNewProject";
+}
+
+@using (Html.BeginForm())
+{
+    <p>Project name: </p><input type="text" name="projectName" /><br />
+    <p>Project description: </p><input type="text" name="projectDescription" /><br />
+    <input type="submit" value="Create new project" />
+}
+

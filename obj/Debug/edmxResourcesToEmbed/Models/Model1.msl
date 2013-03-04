@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="mash_PrimarnaBazaModelStoreContainer" CdmEntityContainer="mash_PrimarnaBazaEntities1">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="mash_PrimarnaBazaModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="datoteka">
+      <EntityTypeMapping TypeName="mash_PrimarnaBazaModel.datoteka">
+        <MappingFragment StoreEntitySet="datoteka">
+          <ScalarProperty Name="idDatoteke" ColumnName="idDatoteke" />
+          <ScalarProperty Name="nazivDatoteke" ColumnName="nazivDatoteke" />
+          <ScalarProperty Name="putanja" ColumnName="putanja" />
+          <ScalarProperty Name="opis" ColumnName="opis" />
+          <ScalarProperty Name="idVlasnik" ColumnName="idVlasnik" />
+          <ScalarProperty Name="datumPostavljanja" ColumnName="datumPostavljanja" />
+          <ScalarProperty Name="datumZadnjeIzmjene" ColumnName="datumZadnjeIzmjene" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="korisnik">
+      <EntityTypeMapping TypeName="mash_PrimarnaBazaModel.korisnik">
+        <MappingFragment StoreEntitySet="korisnik">
+          <ScalarProperty Name="idKorisnik" ColumnName="idKorisnik" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="ime" ColumnName="ime" />
+          <ScalarProperty Name="prezime" ColumnName="prezime" />
+          <ScalarProperty Name="datumRegistracije" ColumnName="datumRegistracije" />
+          <ScalarProperty Name="datumZadnjePrijave" ColumnName="datumZadnjePrijave" />
+          <ScalarProperty Name="lozinka" ColumnName="lozinka" />
+          <ScalarProperty Name="jePovlasten" ColumnName="jePovlasten" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="oznaka">
+      <EntityTypeMapping TypeName="mash_PrimarnaBazaModel.oznaka">
+        <MappingFragment StoreEntitySet="oznaka">
+          <ScalarProperty Name="idOznaka" ColumnName="idOznaka" />
+          <ScalarProperty Name="nazivOznaka" ColumnName="nazivOznaka" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Poruke">
+      <EntityTypeMapping TypeName="mash_PrimarnaBazaModel.Poruke">
+        <MappingFragment StoreEntitySet="Poruke">
+          <ScalarProperty Name="idPoruka" ColumnName="idPoruka" />
+          <ScalarProperty Name="naslovPoruka" ColumnName="naslovPoruka" />
+          <ScalarProperty Name="sadrzaj" ColumnName="sadrzaj" />
+          <ScalarProperty Name="datumPostavljanja" ColumnName="datumPostavljanja" />
+          <ScalarProperty Name="idAutorPoruke" ColumnName="idAutorPoruke" />
+          <ScalarProperty Name="idProjekta" ColumnName="idProjekta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrivatnaPoruka">
+      <EntityTypeMapping TypeName="mash_PrimarnaBazaModel.PrivatnaPoruka">
+        <MappingFragment StoreEntitySet="PrivatnaPoruka">
+          <ScalarProperty Name="idPrivatnePoruke" ColumnName="idPrivatnePoruke" />
+          <ScalarProperty Name="naslovPrivatnePoruke" ColumnName="naslovPrivatnePoruke" />
+          <ScalarProperty Name="sadrzajPrivatnePoruke" ColumnName="sadrzajPrivatnePoruke" />
+          <ScalarProperty Name="idOdKoga" ColumnName="idOdKoga" />
+          <ScalarProperty Name="idZaKoga" ColumnName="idZaKoga" />
+          <ScalarProperty Name="datum" ColumnName="datum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="projekt">
+      <EntityTypeMapping TypeName="mash_PrimarnaBazaModel.projekt">
+        <MappingFragment StoreEntitySet="projekt">
+          <ScalarProperty Name="idProjekt" ColumnName="idProjekt" />
+          <ScalarProperty Name="nazivProjekt" ColumnName="nazivProjekt" />
+          <ScalarProperty Name="datumStvaranja" ColumnName="datumStvaranja" />
+          <ScalarProperty Name="idVlasnika" ColumnName="idVlasnika" />
+          <ScalarProperty Name="opisProjekt" ColumnName="opisProjekt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table2">
+      <EntityTypeMapping TypeName="mash_PrimarnaBazaModel.Table2">
+        <MappingFragment StoreEntitySet="Table2">
+          <ScalarProperty Name="idProjekt" ColumnName="idProjekt" />
+          <ScalarProperty Name="idKorisnik" ColumnName="idKorisnik" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zadatak">
+      <EntityTypeMapping TypeName="mash_PrimarnaBazaModel.Zadatak">
+        <MappingFragment StoreEntitySet="Zadatak">
+          <ScalarProperty Name="idZadatka" ColumnName="idZadatka" />
+          <ScalarProperty Name="tekst" ColumnName="tekst" />
+          <ScalarProperty Name="naslov" ColumnName="naslov" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="sif_OznakaDatoteka" TypeName="mash_PrimarnaBazaModel.sif_OznakaDatoteka" StoreEntitySet="sif_OznakaDatoteka">
+      <EndProperty Name="datoteka">
+        <ScalarProperty Name="idDatoteke" ColumnName="idDatoteke" />
+      </EndProperty>
+      <EndProperty Name="oznaka">
+        <ScalarProperty Name="idOznaka" ColumnName="idOznaka" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="sif_PozvaniProjektKorisnik" TypeName="mash_PrimarnaBazaModel.sif_PozvaniProjektKorisnik" StoreEntitySet="sif_PozvaniProjektKorisnik">
+      <EndProperty Name="korisnik">
+        <ScalarProperty Name="idKorisnik" ColumnName="idKorisnik" />
+      </EndProperty>
+      <EndProperty Name="projekt">
+        <ScalarProperty Name="idProjekt" ColumnName="idProjekt" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="sif_ProjektDatoteka" TypeName="mash_PrimarnaBazaModel.sif_ProjektDatoteka" StoreEntitySet="sif_ProjektDatoteka">
+      <EndProperty Name="datoteka">
+        <ScalarProperty Name="idDatoteke" ColumnName="idDatoteka" />
+      </EndProperty>
+      <EndProperty Name="projekt">
+        <ScalarProperty Name="idProjekt" ColumnName="idProjekt" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="sif_ProjektKorisnik" TypeName="mash_PrimarnaBazaModel.sif_ProjektKorisnik" StoreEntitySet="sif_ProjektKorisnik">
+      <EndProperty Name="korisnik">
+        <ScalarProperty Name="idKorisnik" ColumnName="idKorisnik" />
+      </EndProperty>
+      <EndProperty Name="projekt">
+        <ScalarProperty Name="idProjekt" ColumnName="idProjekt" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="sif_TemaOdgovor" TypeName="mash_PrimarnaBazaModel.sif_TemaOdgovor" StoreEntitySet="sif_TemaOdgovor">
+      <EndProperty Name="Poruke">
+        <ScalarProperty Name="idPoruka" ColumnName="idTeme" />
+      </EndProperty>
+      <EndProperty Name="Poruke1">
+        <ScalarProperty Name="idPoruka" ColumnName="idOdgovora" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

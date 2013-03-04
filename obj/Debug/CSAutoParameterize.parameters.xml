@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="ApplicationServices-Web.config Connection String" description="ApplicationServices Connection String used in web.config by the application to access the database." defaultvalue="data source=.\SQLEXPRESS;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|aspnetdb.mdf;User Instance=true" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ApplicationServices']/@connectionString" />
+  </parameter>
+  <parameter name="mash_PrimarnaBazaEntities-Web.config Connection String" description="mash_PrimarnaBazaEntities Connection String used in web.config by the application to access the database." defaultvalue="metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=85.94.76.170\PADME;Initial Catalog=mash_PrimarnaBaza;User ID=mateo;Password=Imperius;MultipleActiveResultSets=True&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='mash_PrimarnaBazaEntities']/@connectionString" />
+  </parameter>
+  <parameter name="mash_PrimarnaBazaEntities1-Web.config Connection String" description="mash_PrimarnaBazaEntities1 Connection String used in web.config by the application to access the database." defaultvalue="metadata=res://*/Models.Model1.csdl|res://*/Models.Model1.ssdl|res://*/Models.Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=85.94.76.170\PADME;Initial Catalog=mash_PrimarnaBaza;User ID=mateo;Password=Imperius;MultipleActiveResultSets=True&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='mash_PrimarnaBazaEntities1']/@connectionString" />
+  </parameter>
+  <parameter name="mash_mainEntities-Web.config Connection String" description="mash_mainEntities Connection String used in web.config by the application to access the database." defaultvalue="metadata=res://*/Models.ModelBaze.csdl|res://*/Models.ModelBaze.ssdl|res://*/Models.ModelBaze.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=85.94.76.170\PADME;Initial Catalog=mash_main;Persist Security Info=True;User ID=mash;Password=Imperius;MultipleActiveResultSets=True&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='mash_mainEntities']/@connectionString" />
+  </parameter>
+  <parameter name="mash_mainConnectionString-Web.config Connection String" description="mash_mainConnectionString Connection String used in web.config by the application to access the database." defaultvalue="Data Source=85.94.76.170\PADME;Initial Catalog=mash_main;Persist Security Info=True;User ID=mash;Password=Imperius" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='mash_mainConnectionString']/@connectionString" />
+  </parameter>
+  <parameter name="DataSourceConnectionString-Web.config Connection String" description="DataSourceConnectionString Connection String used in web.config by the application to access the database." defaultvalue="Data Source=85.94.76.170\PADME;User ID=mash;Password=Imperius" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DataSourceConnectionString']/@connectionString" />
+  </parameter>
+  <parameter name="DataSourceConnectionString1-Web.config Connection String" description="DataSourceConnectionString1 Connection String used in web.config by the application to access the database." defaultvalue="Data Source=85.94.76.170\PADME;Persist Security Info=True;User ID=mash;Password=Imperius" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DataSourceConnectionString1']/@connectionString" />
+  </parameter>
+</parameters>

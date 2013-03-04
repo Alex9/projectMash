@@ -1,0 +1,11 @@
+﻿@using (Html.BeginForm("UpdateReply","Wall"))
+{
+    var activeProject = ( Mash_v0._3.Models.Project) Session["project"];
+    int topicID = (int)ViewData["topicID"];
+    @Html.Hidden("topicID", topicID);
+    <fieldset>
+        <legend>Response</legend>
+        <input type="text" name="messageText" />
+        <input type="submit" />
+    </fieldset>
+}

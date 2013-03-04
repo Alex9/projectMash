@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Mash_v0._3.Models.Message>
+@{
+    ViewBag.Title = "Wall";
+}
+<div id="topnavigation">
+    <ul>
+        <li>@Ajax.ActionLink("Create New", "AddNewTopic", new AjaxOptions { UpdateTargetId = "NewTopic" })</li>
+        <li>@Html.ActionLink("All wall posts", "Index", "Wall")</li>
+    </ul>
+</div>
+<div class="contentHeader">@ViewBag.Title</div>
+<div class="clearall">
+</div>
+<div id="NewTopic">
+</div>
+<h2>
+    @ViewBag.Message</h2>
+<table>
+    <tr>
+        <td>
+            Project related messages
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @{
+                var messages = (List<Mash_v0._3.Models.Message>)ViewData["messages"];
+                var topics = (List<int?>)ViewData["topics"];
+
+                <ul>
+                    @foreach (var item in messages)
+                    {
+                        if (topics.Contains(item.idMessage))
+                        {
+                        <li>
+                            <div>@item.messageContent</div>
+                            <div>@item.timeCreated</div>
+                            <div>@Html.ActionLink("Open thread", "OpenThread", new { topicID = item.idMessageTopic })</div>
+                        </li>
+                        }
+                    }
+                </ul>
+            }
+        </td>
+    </tr>
+</table>

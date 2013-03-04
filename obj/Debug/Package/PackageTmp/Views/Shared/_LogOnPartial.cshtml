@@ -1,0 +1,70 @@
+﻿<script src="../../Scripts/MicrosoftAjax.js" type="text/javascript"></script>
+<script src="../../Scripts/MicrosoftMvcAjax.js" type="text/javascript"></script>
+<script src="../../Scripts/jquery.unobtrusive-ajax.js" type="text/javascript"></script>
+@if (Request.IsAuthenticated)
+{
+    <div id="ProjectDropDown">
+        <div id="projectList">
+            <form id="projectListForm" name="projectListForm" action="@Url.Action("SetActiveProject", "Project")" method="post" >
+            @{ Mash_v0._3.Models.databaseDataContext db = new Mash_v0._3.Models.databaseDataContext();
+               Mash_v0._3.Models.Project activeProject;
+               string email = ((FormsIdentity)HttpContext.Current.User.Identity).Name.ToString();
+               var signedUser = db.Users.Where(item => item.email.Trim() == email.Trim()).Single();
+
+              
+                
+               var projekti = (from n in db.Projects
+                               join s in db.sif_ProjectUsers on n.idProject equals s.idProject
+                               where s.idUser == signedUser.idUser
+                               select n).ToList();
+
+               if (projekti.Count != 0)
+               {
+                   if (Session["project"] == null)
+                   {
+                       activeProject = projekti.First();
+                       Session["project"] = activeProject;
+                   }
+                   else
+                   {
+                       activeProject = Session["project"] as Mash_v0._3.Models.Project;
+                   }
+                <h2>Project: </h2>
+                <select id="projectSelect" name="projectList">
+                    @foreach (var item in projekti)
+                    {
+                        if (item.projectName.Trim() == activeProject.projectName.Trim())
+                        {
+                        <option value="@item.idProject" selected="selected" >@item.projectName</option>
+                        }
+                        else
+                        {
+                        <option value="@item.idProject" >@item.projectName</option>
+                        }
+                    }
+                </select>
+               }
+               
+            }
+            </form>
+            <input id="createNewProject" class="button" type="button" value="Create new project" onclick="location.href='@Url.Action("AddNewProject", "Project")'" />
+        <div id="manageProjects">@Html.ActionLink("Manage projects", "ListProject", "Project")</div>
+        </div>
+        <div id="searchTop">Search:<input />
+        </div>
+        <div class="clearall"></div>
+        <hr id="wideLine" />
+        
+    </div> 
+    <div id="message">
+    </div>
+}
+else
+{
+}
+<script type="text/javascript">
+    $("#projectList").change(function submitform() {
+        document.projectListForm.submit();
+    });
+
+</script>

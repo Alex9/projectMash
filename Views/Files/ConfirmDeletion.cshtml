@@ -1,0 +1,5 @@
+﻿@using (Html.BeginForm("DeleteFile", "Files", FormMethod.Post))
+{
+    @Html.Hidden("fileID", ViewData["fileid"]);
+   <p> Are you sure? <input type="submit" name="name" value="DELETE" /></p>
+}

@@ -1,0 +1,239 @@
+﻿@if (Request.IsAuthenticated)
+{
+ 
+    <style>
+        .widget
+        {
+            width: 213px;
+            height: 100%;
+            margin-top: 5px;
+        }
+        
+        .widget .widgetTop
+        {
+            background: url("../../Content/Images/widget.png");
+            display: block;
+            width: 203px;
+            height: 10px;
+            font-weight: bold;
+            padding-left: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            color: #fa8936;
+        }
+        
+        .widgetTop widgetText, .widgetBottom widgetText
+        {
+            padding-top: 10px;
+            padding-left: 10px;
+            display: block;
+            float: left;
+        }
+        
+        .widgetBottom
+        {
+            background: url("../../Content/Images/widget_otvoreno.png");
+            display: block;
+            width: 203px;
+            height: 215px;
+            padding-left: 10px;
+        }
+        
+        .widgetTop div
+        {
+            float: right;
+            margin-top: 10px;
+            margin-right: 15px;
+        }
+        
+        .widgetlinija
+        {
+            margin-left: 10px;
+            padding-left: 10px;
+        }
+        
+        .column
+        {
+            width: 170px;
+            float: left;
+            padding-bottom: 100px;
+        }
+        
+        .widgetMinus
+        {
+            float: right;
+            display: block;
+            margin-top: 5px;
+            margin-right: 10px;
+            background: url("../../Content/Images/minus.png");
+            background-repeat: no-repeat;
+            width: 19px;
+            height: 19px;
+        }
+        
+        .widgetPlus
+        {
+            float: right;
+            display: block;
+            margin-top: 5px;
+            margin-right: 10px;
+            background: url("../../Content/Images/plus.png");
+            background-repeat: no-repeat;
+            width: 19px;
+            height: 19px;
+        }
+        
+        .ui-sortable-placeholder
+        {
+            border: 1px dotted black;
+            visibility: visible !important;
+            height: 50px !important;
+        }
+        .ui-sortable-placeholder *
+        {
+            visibility: hidden;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $(".column").sortable({
+                connectWith: ".column"
+            });
+            $(".widgetMinus").click(function () {
+                $(this).toggleClass("widgetMinus").toggleClass("widgetPlus");
+                $(this).parents(".widget:first").find(".widgetBottom").toggle("medium");
+            });
+
+            $(".widgetPlus").click(function () {
+                $(this).toggleClass("widgetMinus").toggleClass("widgetPlus");
+                $(this).parents(".widget:first").find(".widgetBottom").toggle("medium");
+            });
+
+            $(".column").disableSelection();
+        });
+    </script>
+    <div class="column">
+        <div class="widget">
+            <div class="widgetTop">
+                <span class="widgetText">Important tasks</span> <span class="widgetMinus"></span>
+            </div>
+            <div class="widgetBottom">
+                <img class="widgetLinija" src="../../Content/Images/widget_linija.png" alt="slika" />
+                <span>
+                    @{
+    Mash_v0._3.Models.databaseDataContext db = new Mash_v0._3.Models.databaseDataContext();
+    string emailFrom = ((FormsIdentity)System.Web.HttpContext.Current.User.Identity).Name.ToString();
+    var signedUser = db.Users.Where(user => user.email.Trim() == emailFrom).Single();
+
+    var list = (from n in db.Tasks
+                join s in db.sifTaskUserProjects on n.idTask equals s.idTask
+                where s.idUser == signedUser.idUser
+                select n);
+    if (list.Count() > 0)
+    {
+        List<Mash_v0._3.Models.Task> taskList = list.ToList();
+        foreach (var item in taskList)
+        {
+                        @Html.ActionLink(item.taskHeader, "../Task/Details/", new { id = item.idTask });<br />
+        }
+    }
+    else
+    {
+                        <p>
+                            There is no important tasks</p>
+    }                
+                    }
+                </span>
+            </div>
+        </div>
+        <div class="clearall">
+        </div>
+        <div class="widget">
+            <div class="widgetTop">
+                <span>Important files</span> <span class="widgetMinus"></span>
+            </div>
+            <div class="widgetBottom">
+                <img class="widgetLinija" src="../../Content/Images/widget_linija.png" alt="slika" />
+                <span class="widgetText">
+                    @{
+    var listFiles = from n in db.Files
+                    where n.idOwner == signedUser.idUser
+                    select n;
+    if (listFiles.Count() > 0)
+    {
+        int i = 0;
+        foreach (var item in listFiles)
+        {
+                        <p>@Html.ActionLink(item.fileName.TrimEnd(), "../Files/Download", new { path = Server.MapPath("/Files/" + item.fileName.TrimEnd()) })</p>
+                       
+                      i++;
+                      if (i > 3)
+                      {
+                          break;
+                      }
+        }
+    }
+                    }
+                </span>
+            </div>
+        </div>
+        <div class="widget">
+            @{
+    Dictionary<string, int> tagCount = new Dictionary<string, int>();
+
+    var getProjectstList = from n in db.Projects
+                           join s in db.sif_ProjectUsers on n.idProject equals s.idProject
+                           where s.idUser == signedUser.idUser
+                           select n.idProject;
+    
+    var getTagsFiles = (from n in db.Tags
+                   join s in db.sif_TagFiles on n.idTag equals s.idTag
+                   join a in db.sif_ProjectFiles on s.idFile equals a.idFile
+                   where getProjectstList.Contains(a.idProject)
+                   select n);
+                   
+    var getTagTask = from n in db.Tags
+                     join s in db.sifUserTasks on n.idTag equals s.idTag
+                     where s.idUser==signedUser.idUser
+                     select n;
+                     
+    foreach (var item in getTagsFiles)
+    {
+        if (tagCount.ContainsKey(item.tagName))
+        {
+            tagCount[item.tagName]++;
+        }
+        else
+        {
+            tagCount.Add(item.tagName, 1);
+        }
+    }
+
+    foreach (var item in getTagTask)
+    {
+        if (tagCount.ContainsKey(item.tagName))
+        {
+            tagCount[item.tagName]++;
+        }
+        else
+        {
+            tagCount.Add(item.tagName, 1);
+        }
+    }
+    
+    int sumOfTag = tagCount.Values.Sum();
+            }
+            <div class="widgetTop">
+                <span>Tag cloud</span> <span class="widgetMinus"></span>
+            </div>
+            <div class="widgetBottom">
+                <img class="widgetLinija" src="../../Content/Images/widget_linija.png" alt="slika" />
+                <span class="widgetText">
+                @foreach (var item in tagCount.OrderByDescending(item => item.Key))
+                {
+                   <label><font size="@(item.Value*(sumOfTag+1)/sumOfTag)">@Html.ActionLink(item.Key, "../Tag/TagSelector", new { tagName=item.Key})</font></label>
+                }</span>
+            </div>
+        </div>
+    </div>
+}

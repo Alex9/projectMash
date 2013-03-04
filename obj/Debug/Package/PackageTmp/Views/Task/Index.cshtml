@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Mash_v0._3.Models.Task>
+@{
+    ViewBag.Title = "Tasks";
+    var tasks = ViewData["tasks"] as List<Mash_v0._3.Models.Task>;
+    var activeProject = Session["project"] as Mash_v0._3.Models.Project;
+    var db = new Mash_v0._3.Models.databaseDataContext();
+    var taskTagged = ViewData["taskTagged"] as Dictionary<int, List<Mash_v0._3.Models.User>>;
+}
+<div id="topnavigation">
+    <ul>
+        <li>@Ajax.ActionLink("New task", "CreateAjax", new AjaxOptions { UpdateTargetId = "NewTask" })</li>
+        <li>@Html.ActionLink("All tasks", "Index", "Task")</li>
+    </ul>
+</div>
+<div class="contentHeader">@ViewBag.Title</div>
+<div class="clearall">
+</div>
+<div id="NewTask">
+</div>
+
+<script>
+    $(function () {
+        $("#accordion").accordion();
+    });
+	</script>
+<div id="accordion">
+@if (tasks != null){
+        foreach (var item in tasks)
+        {
+
+	<h1><a href="#">@item.taskHeader</a></h1>
+	<div>
+		<p>
+        <span style="font-size:16px">@item.description</span>
+        <hr />
+        @if (item.taskDeadline != null){
+            <br />
+            <span><b>Deadline:</b></span> @item.taskDeadline
+            <br /><br />
+        }
+        @Html.ActionLink("Details", "Details", new { id = item.idTask }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.idTask }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.idTask })
+                    </p>
+	</div>
+
+    }
+}
+</div>
+
+
+                                        @*if (taskTagged != null)
+                    {
+                        <p>
+                            Tagged persons:
+                        </p>
+                        if (!taskTagged.ContainsKey(item.idTask))
+                        {
+                            continue;
+                        }
+                        foreach (var user in taskTagged[item.idTask])
+                        {
+                        <label>
+                            @(user.firstname.TrimEnd() + " " + user.lastname.TrimEnd())
+                        </label>
+                        <br />
+                        }
+                    }
+                    else
+                    {
+                        <p>
+                            No tagged users for this task. @Html.ActionLink("Apply for this task", "ApplyForTask", new { idtask = item.idTask })</p>
+                    }
+                    </p>*@

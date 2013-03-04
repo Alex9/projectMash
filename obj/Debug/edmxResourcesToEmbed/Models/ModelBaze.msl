@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="mash_mainModelStoreContainer" CdmEntityContainer="mash_mainEntities">
+    <EntitySetMapping Name="File">
+      <EntityTypeMapping TypeName="mash_mainModel.File">
+        <MappingFragment StoreEntitySet="File">
+          <ScalarProperty Name="idFile" ColumnName="idFile" />
+          <ScalarProperty Name="fileName" ColumnName="fileName" />
+          <ScalarProperty Name="path" ColumnName="path" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="idOwner" ColumnName="idOwner" />
+          <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+          <ScalarProperty Name="dateUpdated" ColumnName="dateUpdated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Message">
+      <EntityTypeMapping TypeName="mash_mainModel.Message">
+        <MappingFragment StoreEntitySet="Message">
+          <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+          <ScalarProperty Name="messageHeader" ColumnName="messageHeader" />
+          <ScalarProperty Name="messageContent" ColumnName="messageContent" />
+          <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+          <ScalarProperty Name="idMessageAuthor" ColumnName="idMessageAuthor" />
+          <ScalarProperty Name="idProject" ColumnName="idProject" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrivateMessage">
+      <EntityTypeMapping TypeName="mash_mainModel.PrivateMessage">
+        <MappingFragment StoreEntitySet="PrivateMessage">
+          <ScalarProperty Name="idPrivateMessage" ColumnName="idPrivateMessage" />
+          <ScalarProperty Name="idMessageHeader" ColumnName="idMessageHeader" />
+          <ScalarProperty Name="idMessageText" ColumnName="idMessageText" />
+          <ScalarProperty Name="idFrom" ColumnName="idFrom" />
+          <ScalarProperty Name="idTo" ColumnName="idTo" />
+          <ScalarProperty Name="dateSent" ColumnName="dateSent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Project">
+      <EntityTypeMapping TypeName="mash_mainModel.Project">
+        <MappingFragment StoreEntitySet="Project">
+          <ScalarProperty Name="idProject" ColumnName="idProject" />
+          <ScalarProperty Name="projectName" ColumnName="projectName" />
+          <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+          <ScalarProperty Name="idOwner" ColumnName="idOwner" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tag">
+      <EntityTypeMapping TypeName="mash_mainModel.Tag">
+        <MappingFragment StoreEntitySet="Tag">
+          <ScalarProperty Name="idTag" ColumnName="idTag" />
+          <ScalarProperty Name="tagName" ColumnName="tagName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Task">
+      <EntityTypeMapping TypeName="mash_mainModel.Task">
+        <MappingFragment StoreEntitySet="Task">
+          <ScalarProperty Name="idTask" ColumnName="idTask" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="taskHeader" ColumnName="taskHeader" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="mash_mainModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="dateRegistered" ColumnName="dateRegistered" />
+          <ScalarProperty Name="dateLastVisited" ColumnName="dateLastVisited" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="isVIP" ColumnName="isVIP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="sif_InviteProjectUser" TypeName="mash_mainModel.sif_InviteProjectUser" StoreEntitySet="sif_InviteProjectUser">
+      <EndProperty Name="Project">
+        <ScalarProperty Name="idProject" ColumnName="idProject" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="idUser" ColumnName="idUser" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="sif_ProjectFile" TypeName="mash_mainModel.sif_ProjectFile" StoreEntitySet="sif_ProjectFile">
+      <EndProperty Name="File">
+        <ScalarProperty Name="idFile" ColumnName="idFile" />
+      </EndProperty>
+      <EndProperty Name="Project">
+        <ScalarProperty Name="idProject" ColumnName="idProject" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="sif_ProjectUser" TypeName="mash_mainModel.sif_ProjectUser" StoreEntitySet="sif_ProjectUser">
+      <EndProperty Name="Project">
+        <ScalarProperty Name="idProject" ColumnName="idProject" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="idUser" ColumnName="idUser" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="sif_TagFile" TypeName="mash_mainModel.sif_TagFile" StoreEntitySet="sif_TagFile">
+      <EndProperty Name="File">
+        <ScalarProperty Name="idFile" ColumnName="idFile" />
+      </EndProperty>
+      <EndProperty Name="Tag">
+        <ScalarProperty Name="idTag" ColumnName="idTag" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="sif_TopicAnswer" TypeName="mash_mainModel.sif_TopicAnswer" StoreEntitySet="sif_TopicAnswer">
+      <EndProperty Name="Message">
+        <ScalarProperty Name="idMessage" ColumnName="idTopic" />
+      </EndProperty>
+      <EndProperty Name="Message1">
+        <ScalarProperty Name="idMessage" ColumnName="idAnswer" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

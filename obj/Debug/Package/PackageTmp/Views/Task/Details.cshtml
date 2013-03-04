@@ -1,0 +1,64 @@
+﻿@model Mash_v0._3.Models.Task
+@{
+    ViewBag.Title = "Task details";
+
+    var activeProject = Session["project"] as Mash_v0._3.Models.Project;
+    var task = ViewData["task"] as Mash_v0._3.Models.Task;
+    var signedUser = ViewData["user"] as Mash_v0._3.Models.User;
+    var taskTagged = ViewData["taskTagged"] as Dictionary<int, List<Mash_v0._3.Models.User>>;
+    
+}
+<fieldset>
+    <legend>Task</legend>
+    <div class="display-field"><h1>@task.taskHeader</h1></div>
+    <div class="display-label">
+            Details:    
+    </div>
+    <div class="display-field"><h2>@task.description</h2></div>
+    <br />
+    <div id="tagTaskUser">
+        Tagged users<br /> @Ajax.ActionLink("<Edit>", "ShowTaskTagEditControl", new { idTask = task.idTask }, new AjaxOptions { UpdateTargetId = "tagTaskUser" })<br />
+        @if (taskTagged != null)
+        {
+            foreach (var user in taskTagged[task.idTask])
+            {
+            @user.firstname.TrimEnd()  @user.lastname.TrimEnd() <br />
+            }
+        }
+        else
+        {
+            <p>
+                No tagged users for this task.
+            </p>
+        }
+    </div>
+     <br />
+    @Ajax.ActionLink("Add tags", "ShowTagControl", new { idTask = task.idTask }, new AjaxOptions { UpdateTargetId = "tagTask" })
+    <div id="tagTask">
+     @{
+    
+        var db = new Mash_v0._3.Models.databaseDataContext();
+        var getTags = from n in db.Tags
+                      join s in db.sifUserTasks on n.idTag equals s.idTag
+                      where s.idTask == task.idTask
+                      select n;
+                    
+    }
+    @if (getTags.Count() > 0)
+    {
+        <p>Currently assigned tags:</p>
+        foreach (var item in getTags.ToList())
+        {
+            <label>@item.tagName</label><br />
+        }
+    }
+    else
+    {
+        <p>Currently no tags have been assigned</p>
+    }
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit task", "Edit", new { id = task.idTask }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

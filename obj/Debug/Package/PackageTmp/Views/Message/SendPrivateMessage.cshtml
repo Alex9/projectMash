@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "New message";
+    var forID = ViewData["msgTo"] as Mash_v0._3.Models.User;
+    
+}
+<form id="privateMessage" action="@Url.Action("SendPrivateMessage")" method="post" >
+<fieldset>
+    <legend>New message</legend>
+    @Html.Hidden("msgTo", forID.idUser)
+    <table>
+        <tr>
+            <td>
+                For
+            </td>
+            <td>
+                <input type="text" value="@(forID.firstname.TrimEnd() + " " + forID.lastname.TrimEnd())" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Title
+            </td>
+            <td>
+                <input type="text" name="title" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Message
+            </td>
+            <td>
+                <textarea name="message" cols="20" rows="5"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="submit" value="Send" />
+            </td>
+        </tr>
+    </table>
+</fieldset>
+</form>

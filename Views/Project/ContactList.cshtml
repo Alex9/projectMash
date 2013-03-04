@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Contact list";
+    Mash_v0._3.Models.Project activeProject = Session["project"] as Mash_v0._3.Models.Project;
+    Mash_v0._3.Models.User signedUser = ViewData["user"] as Mash_v0._3.Models.User;
+    var roles = ViewData["rolesList"] as List<Mash_v0._3.Models.sifProjectUserRole>;
+    var sifProjectUser = ViewData["getSifProjectUser"] as List<Mash_v0._3.Models.sif_ProjectUser>;
+    IEnumerable<Mash_v0._3.Models.sifProjectUserRole> allRoles = null;
+}
+<div id="topnavigation">
+    <ul>
+        <li>@Ajax.ActionLink("New contact", "ShowInviteControle", new AjaxOptions { UpdateTargetId = "newInvite" })</li>
+        <li>@Html.ActionLink("All contacts", "ContactList", "Project")</li>
+        <li>@Html.ActionLink("Edit contact roles", "Index", "UserRoles")</li>
+    </ul>
+</div>
+<div class="contentHeader">
+    Contacts</div>
+<div class="clearall">
+</div>
+<div id="newInvite">
+</div>
+<br />
+<script type="text/javascript">
+    $(".userRoleSelect").change(function userRoleChange() {
+        $(this).closest(".userRoleForm").submit();
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#accordion").accordion();
+    });
+</script>
+<div id="accordion">
+    @if (ViewData["userList"] != null)
+    {
+        foreach (var item in ViewData["userList"] as List<Mash_v0._3.Models.User>)
+        {
+        <h2>
+            <a href="#">@item.lastname, @item.firstname</a></h2>
+        <div>
+            @if (item.idUser != signedUser.idUser)
+            {
+                @Html.ActionLink("Remove user", "RemoveUser", new { userID = item.idUser });
+            }
+            <br />
+            @if (item.idUser != signedUser.idUser)
+            {
+                @Html.ActionLink("Send message", "../Message/SendPrivateMessage", new { msgTo = item.idUser })
+            }
+            <br /><br />
+            @{
+            string labelRole;
+            Mash_v0._3.Models.sifProjectUserRole Role = new Mash_v0._3.Models.sifProjectUserRole();
+
+            try
+            {
+                allRoles = (from n in roles
+                            select n);
+            }
+            catch (Exception)
+            {
+            }
+            try
+            {
+                Role = (from n in sifProjectUser
+                        join s in roles on n.idUserRole equals s.idUserRole
+                        where n.idUser == item.idUser
+                        select s).Single();
+            }
+            catch (Exception)
+            {
+            }
+            }
+            <div id="UserRolesDropdown">
+                <form class="userRoleForm" action="@Url.Action("SetUserRole", "Project")" method="post" >
+                @Html.Hidden("userId", item.idUser)
+                <select class="userRoleSelect" name="userRoleSelect">
+                    @if (allRoles != null)
+                    {
+                        if (Role.idUserRole != null)
+                        {
+                            if (Role.idUserRole == 0)
+                            {
+                        <option value="" selected="selected"></option>
+                            }
+                            foreach (var secondItem in allRoles)
+                            {
+                                if (secondItem.idUserRole == Role.idUserRole)
+                                {
+                        <option value="@secondItem.idUserRole" selected="selected" >@secondItem.userRoleDescription</option>
+                                }
+                                else
+                                {
+                        <option value="@secondItem.idUserRole" >@secondItem.userRoleDescription</option>
+                                }
+                            }
+                        }
+                    }
+                </select>
+                </form>
+            </div>
+        </div>  
+        
+        }
+    }
+</div>

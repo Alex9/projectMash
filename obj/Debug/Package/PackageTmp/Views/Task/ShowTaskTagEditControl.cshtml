@@ -1,0 +1,63 @@
+﻿@{ 
+    var activeProject = Session["project"] as Mash_v0._3.Models.Project;
+    var task = ViewData["task"] as Mash_v0._3.Models.Task;
+    var signedUser = ViewData["user"] as Mash_v0._3.Models.User;
+    var taskTagged = ViewData["taskTagged"] as Dictionary<int, List<Mash_v0._3.Models.User>>;
+    var usersOnProject = ViewData["usersOnProject"] as List<Mash_v0._3.Models.User>;
+}
+<table>
+    <tr>
+        <td>
+            Tagged users
+        </td>
+        <td>
+            Available users
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @if (taskTagged != null)
+            {
+                using (Html.BeginForm("DeleteTag", "Task", new { idTask = task.idTask }))
+                {
+                    foreach (var item in taskTagged[task.idTask])
+                    {
+                <input type="checkbox" name="selectedObjects" value="@item.idUser" />
+                <label>
+                    @(item.firstname.TrimEnd() + " " + item.lastname.TrimEnd())</label><br />  
+                    }
+                    if (taskTagged[task.idTask].Count != 0)
+                    {
+                <input type="submit" name="name" value="Delete selected tags" />
+                    }
+                }
+            }
+            else
+            {
+                <p>
+                    None</p>
+            }
+        </td>
+        <td>
+            @using (Html.BeginForm("AddingNewTaggedUserToTask", "Task", new { idTask = task.idTask }))
+            {
+                int i = 0;
+                foreach (var item in usersOnProject)
+                {
+                    if (taskTagged != null && taskTagged[task.idTask].Contains(item))
+                    {
+                        continue;
+                    }
+                    i++;
+                <input type="checkbox" name="selectedObjects" value="@item.idUser" />
+                <label>@(item.firstname.TrimEnd() + " " + item.lastname.TrimEnd())</label>
+                <br />  
+                }
+                if (i != 0)
+                {
+                <input type="submit" name="name" value="Tag selected users" />
+                }
+            }
+        </td>
+    </tr>
+</table>
